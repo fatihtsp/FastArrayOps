@@ -2,19 +2,14 @@
 {                                                                              }
 {                           FastArrayOps Library                               }
 {                                                                              }
-{ Orginal project: https://github.com/aklomp/base64                            }
-{ This is an implementation of a base64 stream encoding/decoding library in C99}
-{ with SIMD (AVX2, NEON, AArch64/NEON, SSSE3, SSE4.1, SSE4.2, AVX) and OpenMP  }
-{ acceleration. It also contains wrapper functions to encode/decode simple     }
-{ length-delimited strings.                                                    }
 {                                                                              }
-{ The actual proje motivating project is at https://github.com/komrad36        }
+{ The actual proje motivating this project is at https://github.com/komrad36   }
 { by Kareem Omar. Is's SIMD-accelerated (AVX, AVX2) routines in MacroAssembly  }
 {                                                                              }
 { This is a Delphi port of Kareem's project (in C) by adding generics suppot to}
 { Delphi users and lovers.                                                     }
 {                                                                              }
-{ Copyright (c) 2022 Dr. Fatih Taþpýnar, fatihtsp@gmail.com                    }
+{ Copyright (c) 2022 Dr. Fatih TaÃ¾pÃ½nar, fatihtsp@gmail.com                    }
 { All rights reserved.                                                         }
 {                                                                              }
 { Date: 27.06.2022                                                             }
