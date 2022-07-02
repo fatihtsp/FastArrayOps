@@ -32,7 +32,7 @@ FastArrayOps uses the classical approach and SIMD-accelerated codes (from the pr
   class Procedure MaxValue<T>(const anArrayOf: Array of T; var Result);
  end;
  
-TClassicArrayMinFinder and TClassicArrayMaxFinder uses classical approca to find min-min index and max-maxindex, respectively. The other classes are the ones with SIMD-accelerated routines. The project file contains some test routines and comparisons by SIMD-accelerated routines. Please, investigate the test results using the arrays with 10000000 elements as show below:
+TClassicArrayMinFinder and TClassicArrayMaxFinder uses classical approach to find min value-min index and max value-maxindex, respectively. The other classes are the main ones with SIMD-accelerated routines. The project file contains some test routines and comparisons by SIMD-accelerated routines. Please, investigate the test results using the arrays with 10000000 elements as show below:
 
 ===========================================================================
 
