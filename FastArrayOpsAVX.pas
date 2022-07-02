@@ -2,14 +2,13 @@
 {                                                                              }
 {                           FastArrayOps Library                               }
 {                                                                              }
-{                                                                              }
-{ The actual proje motivating this project is at https://github.com/komrad36   }
+{ The actual proje motivating project is at https://github.com/komrad36        }
 { by Kareem Omar. Is's SIMD-accelerated (AVX, AVX2) routines in MacroAssembly  }
 {                                                                              }
 { This is a Delphi port of Kareem's project (in C) by adding generics suppot to}
 { Delphi users and lovers.                                                     }
 {                                                                              }
-{ Copyright (c) 2022 Dr. Fatih TaÃ¾pÃ½nar, fatihtsp@gmail.com                    }
+{ Copyright (c) 2022 Dr. Fatih Taþpýnar, fatihtsp@gmail.com                    }
 { All rights reserved.                                                         }
 {                                                                              }
 { Date: 27.06.2022                                                             }
@@ -18,10 +17,10 @@
 { Ultra fast avx/avx2 based array max, min, and index finding routines.        }
 { All the routines works well and really fast. Compared with the classically   }
 { coded routine,  sometimes AVX based routine are slightly faster.             }
-{ I've tested on Intel i7-10875H CPU-32GB Ram on Win11 and OS is running with  }
-{ high power mode enabled with battery charger plugged-in...                   }
+{ I've tested on Intel i7-10875H CPU-32GB Ram on Win11 and OS is running via   }
+{ high ower mode enabled  with battery charger plugged-in...                   }
 { Test it and share your findings...                                           }
-{ Also, if you have faster codes you can share.                                }
+{ Also, if you have faster codes you can share                                 }
 {                                                                              }
 {******************************************************************************}
 
@@ -34,7 +33,8 @@ uses
  System.SysUtils, System.Classes, System.Win.Crtl, System.Math,
  System.SyncObjs, System.Diagnostics,
  System.TypInfo,
- System.Generics.Collections
+ System.Generics.Collections,
+ System.Generics.Defaults
  //Rapid.Generics
  ;
 
@@ -121,6 +121,14 @@ type
  public
   class Procedure MaxValue<T>(const anArrayOf: Array of T; var Result);
  end;
+
+
+type
+ TGenericMinMax = class
+ class function Min<T>(const values: array of T; const Comparer: IComparer<T>): T;
+ class function Max<T>(const values: array of T; const Comparer: IComparer<T>): T;
+end;
+
 
 
 //extern "C" bool FastContains8(const void* p, uint64_t n, uint8_t q);
@@ -1111,6 +1119,32 @@ if (TypeInfo(T) = TypeInfo(int8_t)) then begin
  end;
 
 end;
+
+
+class function TGenericMinMax.Max<T>(const values: array of T; const Comparer: IComparer<T>): T;
+var
+ item: T;
+begin
+ if length(values) >= 1 then begin
+  Result := values[Low(values)];
+  for item in values do
+   if Comparer.Compare(item,Result) > 0 then
+    Result := item
+ end;
+end;
+
+class function TGenericMinMax.Min<T>(const values: array of T; const Comparer: IComparer<T>): T;
+var
+ item: T;
+begin
+ if length(values) >= 1 then begin
+  Result := values[Low(values)];
+  for item in values do
+   if Comparer.Compare(item, Result) < 0 then
+    Result := item
+ end;
+end;
+
 
 
 function ArrayIndexOfMinimum(const AValues: array of Integer; var MinVal): Integer;

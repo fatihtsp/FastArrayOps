@@ -5,6 +5,8 @@ program ftFastArrayOpsAVX;
 {$R *.res}
 
 uses
+  FastMM5,
+  System.StartUpCopy,
   System.SysUtils,
   System.Classes,
   System.Types,
@@ -12,8 +14,9 @@ uses
   System.SyncObjs,
   System.Diagnostics,
   System.Generics.Collections,
-  FastArrayOpsAVX in 'FastArrayOpsAVX.pas';
-
+  System.Generics.Defaults,
+  FastArrayOpsAVX in 'FastArrayOpsAVX.pas',
+  Generics.Operators in 'Generics.Operators.pas';
 
 const dummy       = 0;        //Note: this for just pass in fastmin/fastmax functions, so it's meaningless but necesseray hahhh
 const ArrayLength = 10000000;
@@ -67,7 +70,7 @@ begin
 
   PuInt8_t(puint8)^   := 1+Random(Byte.MaxValue-1);      inc(PuInt8_t(PuInt8));
   PuInt16_t(puint16)^ := 1+Random(Word.MaxValue-1);      inc(PuInt16_t(PuInt16));
-  PuInt32_t(puint32)^ := 1+Random(Cardinal.MaxValue-1);  inc(PuInt32_t(PuInt32)); // UnSigned Integer (int32)
+  PuInt32_t(puint32)^ := 1+Random(Cardinal.MaxValue-1);  inc(PuInt32_t(PuInt32)); // UnSigned Integer (uint32)
   PuInt64_t(puint64)^ := 1+Random(UInt64.MaxValue-1);    inc(PuInt64_t(PuInt64));
  end;
 end;
@@ -339,8 +342,6 @@ begin
    var ind_q_in8t: UInt64;
    var q_int8: int8_t := 127;
 
-
-
    var ind_int64 : integer;
    ind_int64     := ArrayLength div 2 - 1;
 
@@ -422,16 +423,41 @@ begin
    var int16V: int16_t;
    var int32V: int32_t;
    var int64V: int64_t;
+   var floatV: float;
+   var doubleV: double;
 
-   TArrayMinFinder.MinValue<int8_t>(int8Arr,   int8V);  write('min8:',      int8V);
-   TArrayMaxFinder.MaxValue<int8_t>(int8Arr,   int8V);  writeln(', max8:',  int8V);
-   TArrayMinFinder.MinValue<int16_t>(int16Arr, int16V); write('min16:',     int16V);
-   TArrayMaxFinder.MaxValue<int16_t>(int16Arr, int16V); writeln(', max16:', int16V);
-   TArrayMinFinder.MinValue<int32_t>(int32Arr, int32V); write('min32:',     int32V);
-   TArrayMaxFinder.MaxValue<int32_t>(int32Arr, int32V); writeln(', max32:', int32V);
-   TArrayMinFinder.MinValue<int64_t>(int64Arr, int64V); write('min64:',     int64V);
-   TArrayMaxFinder.MaxValue<int64_t>(int64Arr, int64V); writeln(', max64:', int64V);
 
+   writeln('TArray...Finder Tests begin............');
+   writeln('--------------------------------------------------------------------------------------------------');
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<int8_t>(int8Arr,   int8V);  write('min8     : ',      int8V:12);
+   TArrayMaxFinder.MaxValue<int8_t>(int8Arr,   int8V);  writeln(', max8:',  int8V:12, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<int16_t>(int16Arr, int16V); write('min16    : ',     int16V:12);
+   TArrayMaxFinder.MaxValue<int16_t>(int16Arr, int16V); writeln(', max16:', int16V:12, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<int32_t>(int32Arr, int32V); write('min32    : ',     int32V:12);
+   TArrayMaxFinder.MaxValue<int32_t>(int32Arr, int32V); writeln(', max32:', int32V:12, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<int64_t>(int64Arr, int64V); write('min64    : ', int64V:12);
+   TArrayMaxFinder.MaxValue<int64_t>(int64Arr, int64V); writeln(', max64:',  int64V:12, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<float>(floatArr, floatV); write('minFloat :',   floatV:13);
+   TArrayMaxFinder.MaxValue<float>(floatArr, floatV); writeln(', maxFloat :', floatV:13, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   ST := TStopwatch.StartNew;
+   TArrayMinFinder.MinValue<double>(doubleArr, doubleV); write('minDouble:',     doubleV:13);
+   TArrayMaxFinder.MaxValue<double>(doubleArr, doubleV); writeln(', maxDouble:', doubleV:13, ', et(ms): ', ST.ElapsedMilliseconds);
+
+   writeln('--------------------------------------------------------------------------------------------------');
+   writeLn;
+
+   writeln('TClassicArray...Finder Tests begin............');
+   writeln('--------------------------------------------------------------------------------------------------');
    var idx: Integer;
 
    ST                  := TStopwatch.StartNew;
@@ -454,6 +480,39 @@ begin
    ST                  := TStopwatch.StartNew;
    TClassicArrayMaxFinder.ValueIndexOfMaximum<int64_t>(int64Arr, idx, int64V);
    writeln('maxInt64 idx: ', idx, ', max64: ', int64V, ', Time(ms): ', ST.ElapsedMilliseconds);
+
+   ST                  := TStopwatch.StartNew;
+   TClassicArrayMinFinder.ValueIndexOfMinimum<float>(floatArr, idx, floatV);
+   writeln('floatV idx: ', idx, ', min: ', floatV, ', Time(ms): ', ST.ElapsedMilliseconds);
+   ST                  := TStopwatch.StartNew;
+   TClassicArrayMaxFinder.ValueIndexOfMaximum<float>(floatArr, idx, floatV);
+   writeln('floatV idx: ', idx, ', max: ', floatV, ', Time(ms): ', ST.ElapsedMilliseconds);
+
+   ST                  := TStopwatch.StartNew;
+   TClassicArrayMinFinder.ValueIndexOfMinimum<double>(doubleArr, idx, doubleV);
+   writeln('doubleV idx: ', idx, ', min: ', doubleV, ', Time(ms): ', ST.ElapsedMilliseconds);
+   ST                  := TStopwatch.StartNew;
+   TClassicArrayMaxFinder.ValueIndexOfMaximum<double>(doubleArr, idx, doubleV);
+   writeln('doubleV idx: ', idx, ', max: ', doubleV, ', Time(ms): ', ST.ElapsedMilliseconds);
+   writeln('--------------------------------------------------------------------------------------------------');
+
+
+
+   ST := TStopwatch.StartNew;
+   int32V := int32_t(TGenericMinMax.Min<int32_t>(int32Arr, TComparer<int32>.Construct(
+    function(const Left,Right: integer): int32_t
+    begin
+     Result := Left-Right
+    end)));
+   writeln('Generic comparer minInt32: ', int32V:9, ', Time(ms): ', ST.ElapsedMilliseconds:4);
+
+   ST := TStopwatch.StartNew;
+   int32V := int32_t(TGenericMinMax.Max<int32_t>(int32Arr, TComparer<int32>.Construct(
+    function(const Left,Right: integer): int32_t
+    begin
+     Result := Left-Right
+    end)));
+   writeln('Generic comparer maxInt32: ', int32V:9, ', Time(ms): ', ST.ElapsedMilliseconds:4);
 
    var boolRes: Boolean;
    int64V := 2000000;
