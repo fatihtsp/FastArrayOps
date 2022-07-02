@@ -15,13 +15,13 @@
 { Date: 27.06.2022                                                             }
 {                                                                              }
 { Notes:                                                                       }
-{ Ultra fast avx/avx2 based array max, min, and index finding routines         }
+{ Ultra fast avx/avx2 based array max, min, and index finding routines.        }
 { All the routines works well and really fast. Compared with the classically   }
 { coded routine,  sometimes AVX based routine are slightly faster.             }
-{ I've tested on Intel i7-10875H CPU-32GB Ram on Win11 and OS is running via   }
-{ high ower mode enabled  with battery charger plugged-in...                   }
+{ I've tested on Intel i7-10875H CPU-32GB Ram on Win11 and OS is running with  }
+{ high power mode enabled with battery charger plugged-in...                   }
 { Test it and share your findings...                                           }
-{ Also, if you have faster codes you can share                                 }
+{ Also, if you have faster codes you can share.                                }
 {                                                                              }
 {******************************************************************************}
 
