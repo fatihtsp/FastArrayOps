@@ -107,7 +107,7 @@ Finished. Press any key to exit...
 
 ===========================================================================
 
-Considering the results, Delphi compiled routines with classical approach slightly slower than SIMD-accelerated routines but not so much different on a huge array. Please test comment on these routines. If you have faster routines please share. 
+Considering the results, Delphi compiled routines with classical approach slightly slower than SIMD-accelerated routines but not so much different on a huge array. Please test the codes and comment on these routines. If you have faster routines please share. 
 
 
 
