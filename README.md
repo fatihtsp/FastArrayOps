@@ -34,7 +34,7 @@ FastArrayOps uses the classical approach and SIMD-accelerated codes (from the pr
  
 TClassicArrayMinFinder and TClassicArrayMaxFinder uses classical approca to find min-min index and max-maxindex, respectively. The other classes are the ones with SIMD-accelerated routines. The project file contains some test routines and comparisons by SIMD-accelerated routines. Please, investigate the test results using the arrays with 10000000 elements as show below:
 
-======================================================================================
+===========================================================================
 
 Random number sets for 10000000 elements are producing...  --->  Random number sets are produced (in 290 ms)...
 
@@ -105,7 +105,7 @@ FastContainsint64Arr(int64V=2000000) is : TRUE
 
 Finished. Press any key to exit...
 
-==========================================================================================
+===========================================================================
 
 Considering the results, Delphi compiled routines with classical approach slightly slower than SIMD-accelerated routines but not so much different on a huge array. Please test comment on these routines. If you have faster routines please share. 
 
