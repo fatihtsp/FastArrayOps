@@ -18,7 +18,7 @@ uses
   FastArrayOpsAVX in 'FastArrayOpsAVX.pas',
   Generics.Operators in 'Generics.Operators.pas';
 
-const dummy       = 0;        //Note: this for just pass in fastmin/fastmax functions, so it's meaningless but necesseray hahhh
+const dummy       = 0;        //Note: this is for just pass in fastmin/fastmax functions, so it's meaningless but necesseray hahhh
 const ArrayLength = 10000000;
 var int8Arr     : Array[0..ArrayLength-1] of int8_t;
 var int16Arr    : Array[0..ArrayLength-1] of int16_t;
