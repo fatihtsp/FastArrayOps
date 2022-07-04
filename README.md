@@ -1,9 +1,9 @@
 # FastArrayOps
-Ultra Fast Array Operations using AVX/AVX2 code on the arrays to find Min-Max values and Index of them.
+Ultra Fast Array Operations using AVX/AVX2 code on the arrays to find Min-Max values and their array index.
 
 ### Overview
 
-In programming, it's very common to use and deal with the arrays, especially numerical arrays, in some operations like sorting, finding minimum and maximum values and their array index. Also, in image processing routines it can be seen that finding the max-min locations of some values, such as frequency histograms, image pixel values and locations of them are very common tasks. So, considering multi repetations on arrays can be very time consuming and it was wanted to be optimized. Here, we already know how to find min and max values iterating over the arrays to find the considered index and the considered value. Therefore, the problem invloves writing faster codes, especially working with large arrays, by using machine codes (SIMD codes AVX, AVX2, AVX512), parallelizm and multi-threading. Also, using generic routines may increase the productivity and decrease the coding effort. 
+In programming, it's very common to use and deal with the arrays, especially numerical arrays, in some operations like sorting, finding minimum and maximum values and their array index. Also, in image processing routines it can be seen that finding the max-min locations of some values, such as frequency histograms, image pixel values and locations of them are very common tasks. So, considering multi repetations on arrays can be very time consuming and it is wanted to be optimized. Here, we already know how to find min and max values iterating over the arrays. Therefore, the problem actually invloves writing faster codes, especially working with large arrays, by using machine codes (SIMD codes AVX, AVX2, AVX512), parallelizm and multi-threading. Also, using generic routines may increase the productivity and decrease the coding effort. 
 
 FastArrayOps uses the classical approach and SIMD-accelerated codes (from the project of Kareem Omar at https://github.com/komrad36) to find minimum and maximum values and their array index. Also, generic routines have been written to test different types of numeric types. Based on Kareem's SIMD code in C, object files were produced (by using ml64.exe in VS) and used in the library. Simply, four types of arrayOp classess have been implemented in FastArrayOpsAVX.pas file as below:
 
@@ -32,7 +32,7 @@ FastArrayOps uses the classical approach and SIMD-accelerated codes (from the pr
   class Procedure MaxValue<T>(const anArrayOf: Array of T; var Result);
  end;
  
-TClassicArrayMinFinder and TClassicArrayMaxFinder uses classical approach to find min value-min index and max value-maxindex, respectively. The other classes are the main ones with SIMD-accelerated routines. The project file contains some test routines and comparisons by SIMD-accelerated routines. Please, investigate the test results using the arrays with 10000000 elements as show below:
+TClassicArrayMinFinder and TClassicArrayMaxFinder uses classical approach to find min value-min index and max value-maxindex, respectively. The other classes are the main ones with SIMD-accelerated routines (TArrayMinFinder and TArrayMaxFinder). The project file contains some test routines and comparisons with the SIMD-accelerated routines. Please, investigate the test results on the arrays of 10000000 elements as shown below:
 
 ===========================================================================
 
