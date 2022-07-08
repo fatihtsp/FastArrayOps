@@ -8,7 +8,7 @@
 { This is a Delphi port of Kareem's project (in C) by adding generics suppot to}
 { Delphi users and lovers.                                                     }
 {                                                                              }
-{ Copyright (c) 2022 Dr. Fatih Taþpýnar, fatihtsp@gmail.com                    }
+{ Copyright (c) 2022 Dr. Fatih TaÃ¾pÃ½nar, fatihtsp@gmail.com                    }
 { All rights reserved.                                                         }
 {                                                                              }
 { Date: 27.06.2022                                                             }
@@ -99,12 +99,12 @@ type
 
  type TClassicArrayMinFinder = class
  public
-  class procedure ValueIndexOfMinimum<T>(const AValues: array of T; IndexOfMin: Integer; var MinVal);
+  class procedure ValueIndexOfMinimum<T>(const AValues: array of T; var IndexOfMin: Integer; var MinVal);
  end;
 
  type TClassicArrayMaxFinder = class
  public
-  class procedure ValueIndexOfMaximum<T>(const AValues: array of T; IndexOfMax: Integer; var MaxVal);
+  class procedure ValueIndexOfMaximum<T>(const AValues: array of T; var IndexOfMax: Integer; var MaxVal);
  end;
 
  type TArrayContainsValue = class
@@ -918,7 +918,7 @@ begin
 
 end;
 
-class procedure TClassicArrayMinFinder.ValueIndexOfMinimum<T>(const AValues: array of T; IndexOfMin: Integer; var MinVal);
+class procedure TClassicArrayMinFinder.ValueIndexOfMinimum<T>(const AValues: array of T; var IndexOfMin: Integer; var MinVal);
 begin
  IndexOfMin      := -1;
  Integer(MinVal) := 0;
@@ -1019,7 +1019,7 @@ begin
 
 end;
 
-class procedure TClassicArrayMaxFinder.ValueIndexOfMaximum<T>(const AValues: array of T; IndexOfMax: Integer; var MaxVal);
+class procedure TClassicArrayMaxFinder.ValueIndexOfMaximum<T>(const AValues: array of T; var IndexOfMax: Integer; var MaxVal);
 begin
  IndexOfMax      := -1;
  Integer(MaxVal) := 0;
@@ -1062,7 +1062,6 @@ if (TypeInfo(T) = TypeInfo(int8_t)) then begin
   IndexOfMax      := LMaxIdx;
   Exit;
  end;
-
 
  if (TypeInfo(T) = TypeInfo(uint8_t)) then begin
   for LValIdx := 1 to High(AValues) do begin
